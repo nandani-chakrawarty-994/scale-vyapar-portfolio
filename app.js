@@ -110,3 +110,11 @@ function displayTestimonials() {
 }
 
 
+document.getElementById('contact-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  const form = e.target;
+  fetch(form.action, { method: 'POST', body: new FormData(form) })
+  .then(response => response.text())
+  .then(() => { alert("Message sent!"); form.reset(); })
+  .catch(() => alert("Error sending message"));
+});
