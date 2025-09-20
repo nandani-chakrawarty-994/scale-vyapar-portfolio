@@ -12,8 +12,6 @@ const addEventOnElem = function (elem, type, callback) {
     elem.addEventListener(type, callback);
   }
 
-
-
 }
 
 
@@ -80,41 +78,62 @@ var swiper = new Swiper(".mySwiper", {
     });
 
 
-// Testimonials Array (Frontend-only version)
-const form = document.getElementById('testimonialForm');
-const testimonialList = document.getElementById('testimonialList');
-let testimonials = [];
-
 // Submit Form
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const name = document.getElementById('customerName').value;
-  const message = document.getElementById('customerMessage').value;
+// form.addEventListener('submit', (e) => {
+//   e.preventDefault();
+//   const name = document.getElementById('customerName').value;
+//   const message = document.getElementById('customerMessage').value;
 
-  const testimonial = { name, message };
-  testimonials.unshift(testimonial); // Newest on top
+//   const testimonial = { name, message };
+//   testimonials.unshift(testimonial); // Newest on top
 
-  displayTestimonials();
-  form.reset();
-});
+//   displayTestimonials();
+//   form.reset();
+// });
 
-// Display Testimonials
-function displayTestimonials() {
-  testimonialList.innerHTML = '';
-  testimonials.forEach(t => {
-    const div = document.createElement('div');
-    div.classList.add('testimonial-card');
-    div.innerHTML = `<strong>${t.name}</strong><p>${t.message}</p>`;
-    testimonialList.appendChild(div);
+// // Display Testimonials
+// function displayTestimonials() {
+//   testimonialList.innerHTML = '';
+//   testimonials.forEach(t => {
+//     const div = document.createElement('div');
+//     div.classList.add('testimonial-card');
+//     div.innerHTML = `<strong>${t.name}</strong><p>${t.message}</p>`;
+//     testimonialList.appendChild(div);
+//   });
+// }
+
+
+
+// Wait until page is fully loaded
+window.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("contact-form");
+
+  if (!form) {
+    console.error("❌ Form with id='contact-form' not found!");
+    return;
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault(); // Default submit disable
+
+    const scriptURL =
+      "https://script.google.com/macros/s/AKfycbyXTEdnQQtSgW8FY4C1_7ioLumzbVyqx23unS8CbPv8zI_A7cuAgua0XL5E5p868s23rw/exec";
+
+    fetch(scriptURL, { method: "POST", body: new FormData(form) })
+      .then((response) => response.text())
+      .then((result) => {
+        alert("✅ Message sent successfully!");
+        console.log("Server Response:", result);
+        form.reset();
+      })
+      .catch((error) => {
+        alert("❌ Something went wrong: " + error.message);
+        console.error("Error:", error);
+      });
   });
-}
-
-
-document.getElementById('contact-form').addEventListener('submit', function(e){
-  e.preventDefault();
-  const form = e.target;
-  fetch(form.action, { method: 'POST', body: new FormData(form) })
-  .then(response => response.text())
-  .then(() => { alert("Message sent!"); form.reset(); })
-  .catch(() => alert("Error sending message"));
 });
+
+
+
+
+

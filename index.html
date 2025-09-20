@@ -513,15 +513,15 @@
             <div class="topic-text">Send us a message</div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
           
-            <form d="contact-form" method="post" action="https://script.google.com/macros/s/AKfycbyXTEdnQQtSgW8FY4C1_7ioLumzbVyqx23unS8CbPv8zI_A7cuAgua0XL5E5p868s23rw/exec">
+            <form id="contact-form" >
               <div class="input-box">
-                <input type="text" placeholder="Enter Your Name" required>
+                <input type="text" name="name" placeholder="Enter Your Name" required>
               </div>
               <div class="input-box">
-                <input type="text" placeholder="Enter Your Email" required>
+                <input type="text" name="email" placeholder="Enter Your Email" required>
               </div>
               <div class="input-box message-box">
-                <textarea placeholder="Your Message"></textarea>
+                <textarea name="message" required></textarea>
               </div>
               <div class="btn-group button">
                 <input type="submit" value="Send Now" class="btn btn-primary">
